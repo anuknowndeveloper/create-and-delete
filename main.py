@@ -1,10 +1,21 @@
 import os
-print('please put the FULL path for example: \n instead of: c:/tfolder \n do: c:/tfolder/tfile.txt')
-ask = input("what's the file's name/path: ")
-cord = input('create or delete: ')
-if cord == "delete":
-    os.remove(ask)
-    print('file deleted.')
-if cord == "create":
-    file = open(ask, 'w')
-    print('file created!')
+def main():
+    ask = input("what's the file's path: ")
+    cord = input('create or delete: ')
+    nm = input('name of the file: ')
+    detect = os.path.exists(os.path.join(ask, nm))
+    if detect == True:
+        truepath = os.path.join(ask, nm)
+        if cord == "delete" or cord == "Delete" or cord == "Del" or cord == "del":
+            os.remove(truepath)
+            print('file deleted.')
+        elif cord == "create" or cord == "Create":
+            file = open(truepath, 'w')
+            print('file created!')
+        else:
+            print('uhh what? please try again??')
+            main()
+    else:
+        print('invalid path.')
+        main()
+main()
